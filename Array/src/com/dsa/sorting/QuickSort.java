@@ -10,7 +10,7 @@ public class QuickSort {
 	        }
 	        
 	        //Partition 
-	        int piviotPosition=partition(input,si,ei);
+	        int piviotPosition=pivotIndex(input,si,ei);
 	        
 	        //Recursive call
 	        quickSort(input,si,piviotPosition-1);
@@ -18,50 +18,33 @@ public class QuickSort {
 	    }
 	    
 	    
-	    public static int partition(int[] input,int si,int ei) {
-	    	//Find Piviot
-	        int piviot=input[si];
-	    
-	    	//Place at position
-	        int count=0;
-	        for(int i=si;i<=ei;i++){
-	            if(input[i]<piviot){
-	                count++;
-	            }
-	        }
+	 public static int pivotIndex(int arr[],int start,int end)
+		{
+	        //Find Piviot
+			int pivot = arr[end];
 	        
-	        //Swap
-	        int piviotPos=si+count;
-	      	input[si]=input[piviotPos];
-	        input[piviotPos]=piviot;
+	         //Ensure towards left <=piviot and right >piviot
+			int pIndex = start;
+			int temp = 0;
+			for(int i=start;i<end;i++)
+			{
+				if(arr[i]<=pivot)
+				{
+					temp = arr[i];
+					arr[i] = arr[pIndex];
+					arr[pIndex] = temp;
+					pIndex++;
+				}
+			}
 	        
-	    	
-	        //Ensure towards left <=piviot and right >piviot
-	        int i=si;
-	        int j=ei;
-	        while(i<piviotPos && j>piviotPos){
-	            
-	            if(input[i]<piviot){
-	                i++;
-	            }
-	            if(input[j]>piviot)
-	            {
-	                j--;
-	            }
-	            if(input[i]>piviot && input[j]<piviot)
-	            {
-	                int temp=input[i];
-	                input[i]=input[j];
-	                input[j]=temp; 
-	                i++;
-	                j--;
-	            }  
-	           
-	        }
-	    	
+	        //Place piviot at position 
+			temp = arr[pIndex];
+			arr[pIndex] = arr[end];
+			arr[end] = temp;
+	        
 	        //Return piviot position
-	        return piviotPos;
-	    }
+			return pIndex;
+		}
 	    
 	    static Scanner s = new Scanner(System.in);
 		
