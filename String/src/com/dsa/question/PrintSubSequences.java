@@ -16,6 +16,7 @@ public class PrintSubSequences {
 		//Base case
 		if(input.length()==0) {
 			System.out.println(outputSoFar);
+			return;
 		}
 
 		//We choose not to include the first character
